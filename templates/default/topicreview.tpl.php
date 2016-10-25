@@ -39,23 +39,27 @@ $templates['header'] = '
 			<td colspan="2" class="forumcat">&raquo; {l_TopicReview}</td>
 		</tr>
 		<tr>
-			<th>{l_Author}</th>
+			<th class="hiddenonmobile">{l_Author}</th>
 			<th>{l_Post}</th>
 		</tr>
 ';
 
 $templates['post'] = '
 		<tr class="tr{colornum}">
-			<td class="postername">
+			<td class="postername hiddenonmobile">
 				<div class="posternamecontainer">{poster_name}</div>
 			</td>
-			<td class="postcontent" rowspan="2">
-				<div class="post">{post_content}</div>
+			<td class="postinfo">
+				<div class="postlinks"></div>
+				<div class="postdate"><span class="showonmobile">{poster_name}</span>{post_date}</div>
 			</td>
 		</tr>
 		<tr class="tr{colornum}">
-			<td class="posterinfo">
-				<div class="field">{post_date}</div>
+			<td class="posterinfo hiddenonmobile">
+				{post_date}
+			</td>
+			<td class="postcontent">
+				<div class="post">{post_content}</div>
 			</td>
 		</tr>
 ';

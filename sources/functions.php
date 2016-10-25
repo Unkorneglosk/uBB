@@ -1656,14 +1656,10 @@ class functions {
 	 */
 	function isset_al() {
 		
-		$cookie_name = $this->get_config('session_name').'_al';
-
-		if ( empty($_COOKIE[$cookie_name]) )
-			return FALSE;
-
-		$value = stripslashes($_COOKIE[$cookie_name]);
-
-		return ( preg_match('/^a:2:\{i:0;i:[0-9]+;i:1;s:32:"[a-z0-9]{32}";\}$/', $value) === 1 );
+		if ( !empty($_COOKIE[$this->get_config('session_name').'_al']) )
+			return true;
+		else
+			return false;
 		
 	}
 	
@@ -1674,10 +1670,19 @@ class functions {
 	 */
 	function get_al() {
 		
-		if ( !$this->isset_al() )
-			return FALSE;
+		if ( $this->isset_al() ) {
 			
-		return unserialize(stripslashes($_COOKIE[$this->get_config('session_name').'_al']));
+			$content = stripslashes($_COOKIE[$this->get_config('session_name').'_al']);
+			if ( substr($content, 0, 1) == 'a' )
+				return unserialize($content);
+			else
+				return explode(':', $content, 2);
+			
+		} else {
+			
+			return false;
+			
+		}
 		
 	}
 	
@@ -2285,17 +2290,17 @@ class functions {
 				// [img]image[/img]
 					"#\[img\]([\w]+?://[\w\#\$%&~/\.\-;:=,\?@\[\]\+\\\\\'!\(\)\*]*?)\[/img\]#is" => ( $links ) ? '<img src="\\1" alt="'.$lang['UserPostedImage'].'" class="user-posted-image" />' : '\\1',
 				// www.usebb.net
-					"#([\s])(www\.[\w\#\$%&~/\.\-;:=,\?@\[\]\+\\\\\'!\(\)\*]*?)#is" => ( $links ) ? '\\1<a href="http://\\2" title="http://\\2"'.$rel.'>\\2</a>\\3' : '\\1\\2\\3',
+					"#([\s])(www\.[\w\#\$%&~/\.\-;:=,\?@\[\]\+\\\\\'!\(\)\*]*?)#is" => ( $links ) ? '\\1<a href="http://\\2" title="http://\\2"'.$rel.' target="_blank">\\2</a>\\3' : '\\1\\2\\3',
 				// ftp.usebb.net
-					"#([\s])(ftp\.[\w\#\$%&~/\.\-;:=,\?@\[\]\+\\\\\'!\(\)\*]*?)([\s])#is" => ( $links ) ? '\\1<a href="ftp://\\2" title="ftp://\\2"'.$rel.'>\\2</a>\\3' : '\\1\\2\\3',
+					"#([\s])(ftp\.[\w\#\$%&~/\.\-;:=,\?@\[\]\+\\\\\'!\(\)\*]*?)([\s])#is" => ( $links ) ? '\\1<a href="ftp://\\2" title="ftp://\\2"'.$rel.' target="_blank">\\2</a>\\3' : '\\1\\2\\3',
 				// [url]http://www.usebb.net[/url]
-					"#\[url\]([\w]+?://[\w\#\$%&~/\.\-;:=,\?@\[\]\+\\\\\'!\(\)\*]*?)\[/url\]#is" => ( $links ) ? '<a href="\\1" title="\\1"'.$rel.'>\\1</a>' : '\\1',
+					"#\[url\]([\w]+?://[\w\#\$%&~/\.\-;:=,\?@\[\]\+\\\\\'!\(\)\*]*?)\[/url\]#is" => ( $links ) ? '<a href="\\1" title="\\1"'.$rel.' target="_blank">\\1</a>' : '\\1',
 				// [url=http://www.usebb.net]UseBB[/url]
-					"#\[url=([\w]+?://[\w\#\$%&~/\.\-;:=,\?@\[\]\+\\\\\'!\(\)\*]*?)\](.*?)\[/url\]#is" => ( $links ) ? '<a href="\\1" title="\\1"'.$rel.'>\\2</a>' : '\\2 [\\1]',
+					"#\[url=([\w]+?://[\w\#\$%&~/\.\-;:=,\?@\[\]\+\\\\\'!\(\)\*]*?)\](.*?)\[/url\]#is" => ( $links ) ? '<a href="\\1" title="\\1"'.$rel.' target="_blank">\\2</a>' : '\\2 [\\1]',
 				// [mailto]somebody@nonexistent.com[/mailto]
-					"#\[mailto\]([a-z0-9&\-_\.\+]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)\[/mailto\]#is" => ( $links ) ? '<a href="mailto:\\1" title="\\1">\\1</a>' : '\\1',
+					"#\[mailto\]([a-z0-9&\-_\.\+]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)\[/mailto\]#is" => ( $links ) ? '<a href="mailto:\\1" title="\\1" target="_blank">\\1</a>' : '\\1',
 				// [mailto=somebody@nonexistent.com]mail me[/mailto]
-					"#\[mailto=([a-z0-9&\-_\.\+]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)\](.*?)\[/mailto\]#is" => ( $links ) ? '<a href="mailto:\\1" title="\\1">\\3</a>' : '\\3 [\\1]',
+					"#\[mailto=([a-z0-9&\-_\.\+]+?@[\w\-]+\.([\w\-\.]+\.)?[\w]+)\](.*?)\[/mailto\]#is" => ( $links ) ? '<a href="mailto:\\1" title="\\1" target="_blank">\\3</a>' : '\\3 [\\1]',
 				// [color=red]text[/color]
 					"#\[color=([\#a-z0-9]+)\](.*?)\[/color\]#is" => '<span style="color:\\1">\\2</span>',
 				// [size=999]too big text[/size]
@@ -2355,31 +2360,31 @@ class functions {
 		global $lang, $template;
 		
 		$controls = array(
-			array('[b]', '[/b]', 'B', 'font-weight: bold'),
-			array('[i]', '[/i]', 'I', 'font-style: italic'),
-			array('[u]', '[/u]', 'U', 'text-decoration: underline'),
-			array('[s]', '[/s]', 'S', 'text-decoration: line-through'),
-			array('[quote]', '[/quote]', $lang['Quote'], ''),
-			array('[code]', '[/code]', $lang['Code'], ''),
+			array('[b]', '[/b]', 'B', 'font-weight: bold', 'control-bold'),
+			array('[i]', '[/i]', 'I', 'font-style: italic', 'control-italic'),
+			array('[u]', '[/u]', 'U', 'text-decoration: underline', 'control-underline'),
+			array('[s]', '[/s]', 'S', 'text-decoration: line-through', 'control-strike'),
+			array('[quote]', '[/quote]', $lang['Quote'], '', 'control-quote'),
+			array('[code]', '[/code]', $lang['Code'], '', 'control-code'),
 		);
 
 		if ( $links ) {
 
 			$controls = array_merge($controls, array(
-				array('[img]', '[/img]', $lang['Img'], ''),
-				array('[url=http://www.example.com]', '[/url]', $lang['URL'], ''),
+				array('[img]', '[/img]', $lang['Img'], '', 'control-image'),
+				array('[url=http://www.example.com]', '[/url]', $lang['URL'], '', 'control-url'),
 			));
 
 		}
 
 		$controls = array_merge($controls, array(
-			array('[color=red]', '[/color]', $lang['Color'], ''),
-			array('[size=14]', '[/size]', $lang['Size'], '')
+			array('[color=red]', '[/color]', $lang['Color'], '', 'control-color'),
+			array('[size=14]', '[/size]', $lang['Size'], '', 'control-size')
 		));
 		
 		$out = array();
 		foreach ( $controls as $data )
-			$out[] = '<a href="javascript:void(0);" onclick="insert_tags(\''.$data[0].'\', \''.$data[1].'\')" style="'.$data[3].'">'.$data[2].'</a>';
+			$out[] = '<a href="javascript:void(0);" onclick="insert_tags(\''.$data[0].'\', \''.$data[1].'\')" style="'.$data[3].'" class="'.$data[4].'">'.$data[2].'</a>';
 		
 		return join($template->get_config('post_form_bbcode_seperator'), $out);
 		

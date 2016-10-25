@@ -12,7 +12,8 @@ html, body {
 	color: #000;
 }
 #pagebox-bg {
-	width: 725px;
+	max-width: 725px;
+    width: 90%;
 	background-image: url(gfx/pagebox_bg.png);
 	background-repeat: repeat-x;
 	background-color: #FFF;
@@ -462,7 +463,8 @@ table.maintable td.postcontent {
 	vertical-align: top;
 }
 table.maintable td.postcontent .post {
-	width: 560px;
+	max-width: 560px;
+    width: 100%;
 	overflow: auto;
 	font-size: 10pt;
 	cursor: auto;
@@ -770,4 +772,79 @@ a#usebb_acp_link {
 	margin: 3px 0 0 0;
 	border: 1px solid silver;
 	padding: 3px;
+}
+
+/* uBB is coming ^^ */
+.showonmobile {
+    display: none;
+}
+.postdate .usebb-avatar {
+    display: none;
+}
+input[type="text" i] {
+    width: 100%;
+    max-width: 300px;
+}
+ul#forummenu {
+    background-color: #EFEFEF;
+    border: 1px solid #CCC;
+    border-top-width: 0;
+    padding: 3px 0 3px 0;
+    margin: 0 0 10px 0;
+    box-shadow: 0 2px 2px 0 #888888;
+    list-style: none;
+    text-align: left;
+    position: relative;
+    behavior: url(./templates/default/PIE.htc);
+    display: none;
+}
+ul#forummenu li {
+	display: inline;
+}
+ul#forummenu li a:link, ul#forummenu li a:visited, ul#forummenu li a:hover {
+	text-decoration: none;
+	padding: 3px 7px;
+}
+ul#forummenu li a:link, ul#forummenu li a:visited {
+	color: #336699;
+}
+ul#forummenu li a:active, ul#forummenu li a:hover {
+	color: #7F0000;
+	background-color: #E2E2E2;
+}
+@media screen and (max-width: 725px) {
+    .hiddenonmobile {
+        display: none;
+    }
+    .responsive_logo {
+        max-width: 150px;
+    }
+    .showonmobile {
+        display: block;
+    }
+    table.maintable th.lastpostinfo, table.maintable td.lastpostinfo {
+        display: none;
+    }
+    .postdate .usebb-avatar {
+        float: left;
+        margin-right: 5px;
+        width: 30px;
+        height: 30px;
+        display: block;
+    }
+    ul#topmenu {
+        margin: 5px 0 0 0;
+    }
+    table.maintable td, table.confirmform td, td.msg {
+        border-right: 1px solid silver;
+    }
+    ul#forummenu {
+        display: block;
+    }
+    table#spamquestion, table.thinner-table, .msgbox, table.confirmform {
+        width: 100%;
+    }
+    .control-color, .control-size, .control-strike {
+        display: none;
+    }
 }

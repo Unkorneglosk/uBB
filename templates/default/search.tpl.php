@@ -40,21 +40,21 @@ $templates['search_form'] = '
 			<th colspan="2">{l_Search}</th>
 		</tr>
 		<tr>
-			<td class="fieldtitle">{l_SearchKeywords}</td><td>{keywords_input}<div class="moreinfo">{keywords_explain}</div></td>
+			<td class="fieldtitle hiddenonmobile">{l_SearchKeywords}</td><td>{keywords_input}<div class="moreinfo">{keywords_explain}</div></td>
 		</tr>
-		<tr>
+		<tr class="hiddenonmobile">
 			<td class="fieldtitle">{l_SearchMode}</td><td>{mode_input}</td>
 		</tr>
-		<tr>
+		<tr class="hiddenonmobile">
 			<td class="fieldtitle">{l_SearchAuthor}</td><td>{author_input} {exact_match_input} {include_guests_input}</td>
 		</tr>
-		<tr>
+		<tr class="hiddenonmobile">
 			<td class="fieldtitle">{l_SearchForums}</td><td>{forums_input}</td>
 		</tr>
-		<tr>
+		<tr class="hiddenonmobile">
 			<td class="fieldtitle">{l_SortBy}</td><td>{sort_input}</td>
 		</tr>
-		<tr>
+		<tr class="hiddenonmobile">
 			<td class="fieldtitle">{l_ShowResultsAs}</td><td>{show_mode_input}</td>
 		</tr>
 		<tr>

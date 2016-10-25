@@ -93,10 +93,11 @@ $templates['normal_header'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Stri
 <head>	
 	<meta http-equiv="Content-Type" content="{content_type}; charset={character_encoding}" />
 	<title>{board_name}: {breadcrumbs_last}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="{board_descr}" />
 	<meta name="keywords" content="{board_keywords}" />
 	<link rel="stylesheet" type="text/css" href="{css_url}" />{acp_css_head_link}
-	<link rel="shortcut icon" href="{img_dir}usebb.ico" />
+	<link rel="shortcut icon" href="{img_dir}uBB_web_icon.ico" />
 	{rss_head_link}
 	<script type="text/javascript" src="sources/javascript.js"></script>
 	{js_ga_code}
@@ -104,17 +105,21 @@ $templates['normal_header'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Stri
 <body{js_onload}>
 	<div id="pagebox-bg">
 	
-	<p id="logo"><a href="{link_home}"><img src="{img_dir}usebb.png" alt="UseBB" title="{l_Home}" /></a></p>
+	<p id="logo"><a href="{link_home}"><img src="{img_dir}uBB_web.png" alt="UseBB" title="{l_Home}"  class="responsive_logo"/></a></p>
 	<h1 id="boardname"><span id="line">{board_name}</span></h1>
 	<h2 id="boarddescr">{board_descr}</h2>
 	
 	<ul id="topmenu">
-		<li><a href="{link_home}">{l_Home}</a></li
+		<li><a href="{link_home}" class="hiddenonmobile">{l_Home}</a></li
 		><li><a href="{link_reg_panel}">{reg_panel}</a></li
-		><li><a href="{link_faq}">{l_FAQ}</a></li
-		><li><a href="{link_search}">{l_Search}</a></li
-		><li><a href="{link_active}">{l_ActiveTopics}</a></li
+		><li><a href="{link_faq}" class="hiddenonmobile">{l_FAQ}</a></li
+		><li><a href="{link_search}" class="hiddenonmobile">{l_Search}</a></li
+		><li><a href="{link_active}" class="hiddenonmobile">{l_ActiveTopics}</a></li
 		><li><a href="{link_log_inout}">{log_inout}</a></li>
+	</ul>
+    <ul id="forummenu">
+		<li><a href="{link_search}">{l_Search}</a></li
+		><li><a href="{link_active}">{l_ActiveTopics}</a></li>
 	</ul>
 	
 	<p class="breadcrumbs">

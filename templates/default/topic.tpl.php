@@ -40,23 +40,23 @@ $templates['header'] = '
 	<p id="pagelinkstop">{page_links}</p>
 	<table class="maintable">
 		<tr>
-			<th>{l_Author}</th>
+			<th class="hiddenonmobile">{l_Author}</th>
 			<th>{l_Post}</th>
 		</tr>
 ';
 
 $templates['post'] = '
 		<tr class="tr{colornum}">
-			<td class="postername">
+			<td class="postername hiddenonmobile">
 				<div class="posternamecontainer">{poster_name}</div>
 			</td>
 			<td class="postinfo">
 				<div class="postlinks">{post_links}</div>
-				<div class="postdate">{post_anchor} {post_date}</div>
+				<div class="postdate">{poster_avatar}<span class="showonmobile">{poster_name}</span> {post_anchor} {post_date}</div>
 			</td>
 		</tr>
 		<tr class="tr{colornum}">
-			<td class="posterinfo">
+			<td class="posterinfo hiddenonmobile">
 				{poster_rank}
 				<div class="avatar">{poster_avatar}</div>
 				<div class="field">{registered}</div>
