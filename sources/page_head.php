@@ -235,7 +235,7 @@ $template->add_global_vars(array(
 	'link_stats' => $functions->make_url('stats.php'),
 	
 	'rss_head_link' => ( $rss_enabled ) ? '<link rel="alternate" type="application/rss+xml" title="'.$lang['RSSFeed'].'" href="'.$rss_link.'" />' : '',
-	'usebb_copyright' => sprintf($lang['PoweredBy'], unhtml($functions->get_config('board_name')), '<a href="http://www.usebb.net">UseBB 1 '.$lang['ForumSoftware'].'</a>'),
+	'ubb_copyright' => sprintf($lang['PoweredBy'], '<a href="http://u-bb.kube17.tk">uBB 1</a>'),
 	
 	'reset_button' => '<input type="reset" value="'.$lang['Reset'].'" />',
 
