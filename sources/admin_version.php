@@ -42,87 +42,14 @@
 //
 if ( !defined('INCLUDED') )
 	exit();
-
-$success = false;
-
-if ( !empty($_SESSION['latest_version']) ) {
-	
-	//
-	// Already in session
-	//
-	$success = true;
-	
+$ubb_latest = file_get_contents('http://u-bb.kube17.tk/latest_version.txt');
+if($ubb_latest == USEBB_VERSION) {
+	$content .= '<h2>'.$lang['VersionLatestVersionTitle'].'</h2>';
+	$content .= '<p>'.sprintf($lang['VersionLatestVersion'], USEBB_VERSION).'</p>';
 } else {
-	
-	$found_version = $admin_functions->read_remote_file('http://u-bb.kube17.tk/latest_version');
-	
-	//
-	// Check for valid version
-	//
-	if ( !empty($found_version) ) {
-		
-		$_SESSION['latest_version'] = $found_version;
-		$success = true;
-		
-	}
-
-}
-
-if ( !$success ) {
-	
-	$content = '<p>'.sprintf($lang['VersionFailed'], '<a href="http://u-bb.kube17.tk/">u-bb.kube17.tk</a>').'</p>';
-	
-} else {
-	
-	$content = '';
-	$msg = preg_split("#[\r\n]{2,}#", $_SESSION['latest_version']);
-	
-	//
-	// Version comparing
-	//
-	if ( preg_match('#^[0-9]+\.[0-9]+#', $msg[0]) ) {
-		
-		$version = array_shift($msg);
-
-		switch ( version_compare(USEBB_VERSION, $version) ) {
-			
-			case -1:
-				$content .= '<h2>'.$lang['VersionNeedUpdateTitle'].'</h2>';
-				$content .= '<p><strong>'.sprintf($lang['VersionNeedUpdate'], USEBB_VERSION, unhtml($version), '<a href="http://u-bb.kube17.tk/downloads.php">uBB</a>').'</strong></p>';
-				break;
-			case 1:
-				$content .= '<h2>'.$lang['VersionBewareDevVersionsTitle'].'</h2>';
-				$content .= '<p>'.sprintf($lang['VersionBewareDevVersions'], USEBB_VERSION, unhtml($version)).'</p>';
-				break;
-			default:
-				$content .= '<h2>'.$lang['VersionLatestVersionTitle'].'</h2>';
-				$content .= '<p>'.sprintf($lang['VersionLatestVersion'], USEBB_VERSION).'</p>';
-			
-		}
-
-	}
-
-	//
-	// Messages
-	//
-	foreach ( $msg as $line ) {
-		
-		// Denote headers with leading =
-		if ( substr($line, 0, 1) == '=' ) {
-			
-			$line = substr($line, 1);
-			$content .= '<h2>'.unhtml($line).'</h2>';
-
-			continue;
-			
-		}
-
-		$content .= '<p>'.nl2br(unhtml($line)).'</p>';
-
-	}
-	
+	$content .= '<h2>'.$lang['VersionNeedUpdateTitle'].'</h2>';
+	$content .= '<p><strong>'.sprintf($lang['VersionNeedUpdate'], USEBB_VERSION, unhtml($ubb_latest), '<a href="http://u-bb.kube17.tk/downloads.php">uBB</a>').'</strong></p>';
 }
 
 $admin_functions->create_body('version', $content);
-
 ?>
