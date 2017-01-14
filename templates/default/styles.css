@@ -63,7 +63,11 @@ input[type="reset"] {
 	color: #666;
 	font-style: italic;
 }
-
+code,
+pre,
+samp {
+  white-space: pre-wrap; /* force long lines to break */
+}
 pre.code {
 	display: block;
 	margin: 0 25px 0 25px;
@@ -76,13 +80,11 @@ pre.code {
 	font-size: 8pt;
 }
 table.maintable pre.code {
-	width: 502px;
-	padding: 5px 5px 20px 5px;
+  overflow: auto;
+  width: 96%;
+  margin: 0;
+  padding: 0;
 }
-html>body table.maintable pre.code {
-	padding: 5px;
-}
-
 
 blockquote.quote {
 	margin: 0 25px 0 25px;
@@ -848,3 +850,31 @@ ul#forummenu li a:active, ul#forummenu li a:hover {
         display: none;
     }
 }
+
+ul#main-menu {
+	background-color: #EFEFEF;
+	border: 1px solid #CCC;
+	border-top-width: 0;
+	padding: 3px 0 3px 0;
+	margin: 0 0 10px 0;
+	box-shadow: 0 2px 2px 0 #888888;
+	list-style: none;
+	text-align: left;
+	position: relative;
+	behavior: url(./templates/default/PIE.htc);
+}
+ul#main-menu li {
+	display: inline;
+}
+ul#main-menu li a:link, ul#forummenu li a:visited, ul#forummenu li a:hover {
+	text-decoration: none;
+	padding: 3px 7px;
+}
+ul#main-menu li a:link, ul#forummenu li a:visited {
+	color: #336699;
+}
+ul#main-menu li a:active, ul#forummenu li a:hover {
+	color: #7F0000;
+	background-color: #E2E2E2;
+}
+
