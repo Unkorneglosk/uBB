@@ -140,7 +140,7 @@ $templates['normal_footer'] = '
 	{debug_info_large}
 	
 	<p id="bottom">
-		{usebb_copyright}
+		{ubb_copyright}
 	</p>
 	
 	</div>
