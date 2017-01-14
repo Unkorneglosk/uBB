@@ -54,7 +54,7 @@ if ( !empty($_SESSION['latest_version']) ) {
 	
 } else {
 	
-	$found_version = $admin_functions->read_remote_file('http://usebb.sourceforge.net/latest_version_extended');
+	$found_version = $admin_functions->read_remote_file('http://u-bb.kube17.tk/latest_version');
 	
 	//
 	// Check for valid version
@@ -70,7 +70,7 @@ if ( !empty($_SESSION['latest_version']) ) {
 
 if ( !$success ) {
 	
-	$content = '<p>'.sprintf($lang['VersionFailed'], '<a href="http://www.usebb.net/">www.usebb.net</a>').'</p>';
+	$content = '<p>'.sprintf($lang['VersionFailed'], '<a href="http://u-bb.kube17.tk/">u-bb.kube17.tk</a>').'</p>';
 	
 } else {
 	
@@ -88,7 +88,7 @@ if ( !$success ) {
 			
 			case -1:
 				$content .= '<h2>'.$lang['VersionNeedUpdateTitle'].'</h2>';
-				$content .= '<p><strong>'.sprintf($lang['VersionNeedUpdate'], USEBB_VERSION, unhtml($version), '<a href="http://www.usebb.net/downloads/">www.usebb.net/downloads</a>').'</strong></p>';
+				$content .= '<p><strong>'.sprintf($lang['VersionNeedUpdate'], USEBB_VERSION, unhtml($version), '<a href="http://u-bb.kube17.tk/downloads.php">uBB</a>').'</strong></p>';
 				break;
 			case 1:
 				$content .= '<h2>'.$lang['VersionBewareDevVersionsTitle'].'</h2>';
