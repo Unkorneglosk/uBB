@@ -457,6 +457,8 @@ table.maintable td.posterinfo .avatar {
 }
 table.maintable td.posterinfo .avatar img {
 	margin-bottom: 10px;
+	max-width: 130px;
+	max-height: 130px;
 }
 table.maintable td.posterinfo .field {
 	color: #444;
