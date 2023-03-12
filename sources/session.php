@@ -519,7 +519,7 @@ class session {
 		//
 		// If the user logged in, use a new session ID (security measure)
 		//
-		if ( ( !$session_started && $new_sess_info['user_id'] ) || ( $session_started && $new_sess_info['user_id'] > $current_sess_info['user_id'] ) ) {
+		/* if ( ( !$session_started && $new_sess_info['user_id'] ) || ( $session_started && $new_sess_info['user_id'] > $current_sess_info['user_id'] ) ) {
 			
 			//
 			// Try to find a new session ID that does not yet exist
@@ -537,6 +537,7 @@ class session {
 			// Set the new session ID and update the cookie (not done automatically)
 			//
 			$old_sid = session_id($new_sid);
+			//$old_id = $new_id;
 			$functions->setcookie($functions->get_config('session_name').'_sid', $new_sid);
 			
 			//
@@ -549,7 +550,7 @@ class session {
 			//
 			$_SESSION['viewed_topics'] = array();
 			
-		}
+		} */
 		
 		//
 		// Save data in DB

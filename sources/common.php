@@ -203,7 +203,7 @@ else
 /**
  * Current UseBB version.
  */
-define('USEBB_VERSION', '1.0.2');
+define('USEBB_VERSION', '1.0.3');
 /**
  * Regular expression for matching usernames.
  */

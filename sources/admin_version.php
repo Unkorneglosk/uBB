@@ -42,8 +42,8 @@
 //
 if ( !defined('INCLUDED') )
 	exit();
-$ubb_latest = file_get_contents('http://u-bb.kube17.tk/latest_version.txt');
-if($ubb_latest == USEBB_VERSION) {
+$ubb_latest = file_get_contents('https://ubb.losk.fr/forums/latest_version.txt');
+if(version_compare($ubb_latest, USEBB_VERSION, '<=')) {
 	$content .= '<h2>'.$lang['VersionLatestVersionTitle'].'</h2>';
 	$content .= '<p>'.sprintf($lang['VersionLatestVersion'], USEBB_VERSION).'</p>';
 } else {

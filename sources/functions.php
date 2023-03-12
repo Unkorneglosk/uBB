@@ -682,7 +682,7 @@ class functions {
 		$html_msg  = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<title>UseBB General Error</title>
+		<title>uBB General Error</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 		<style type="text/css">
 			body {
@@ -710,7 +710,7 @@ class functions {
 		</style>
 	</head>
 	<body>
-		<h1>UseBB General Error</h1>
+		<h1>uBB General Error</h1>
 		<p>An error was encountered. We apologize for any inconvenience.</p>
 		<blockquote>
 			<p>In file <strong>'.$file.'</strong> on line <strong>'.$line.'</strong>:</p>
@@ -748,7 +748,7 @@ class functions {
 			|| ( $errtype == 'SQL_ERROR' && preg_match("#(?:Table '.+' doesn't exist|Access denied for user)#i", $error) ) ) {
 			
 			$html_msg .= '
-		<p><strong>UseBB may not have been installed yet.</strong></p>
+		<p><strong>uBB may not have been installed yet.</strong></p>
 		<p>If this is the case and you are the owner of this board, please <a href="docs/index.html">see docs/index.html for <strong>installation instructions</strong></a>.</p>
 		<p>Otherwise, please report this error to the owner.</p>';
 			
